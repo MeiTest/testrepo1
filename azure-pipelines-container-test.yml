@@ -1,8 +1,15 @@
 resources:         
   containers:
-  - container: smartHotel 
-    connection: myDockerRegistry
-    image: smartHotelApp 
+  - container: petStore      
+    type: ACR  
+    azureSubscription: ContosoARMConnection
+    resourceGroup: ContosoGroup
+    registry: petStoreRegistry
+    repository: myPets
+    trigger: 
+      tags:
+        include: 
+        - production*
 
 stages:
 - stage: rootBuild
