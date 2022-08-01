@@ -26,7 +26,7 @@ pool: Default
 
 
 extends:
-  template: re唉丂荳◎℉㐁a.yml
+  template: 唉丂荳◎℉㐁a.yml
   parameters:
     testSet:
     - job: positive_test
