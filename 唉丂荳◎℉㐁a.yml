@@ -1,0 +1,36 @@
+# parameters: 
+# - name: testSet
+#   type: jobList
+
+# jobs:
+# - ${{ each testJob in parameters.testSet }}:
+#   - ${{ if eq(testJob.templateContext.expectedHTTPResponseCode, 200) }}:
+#     - job:
+#       steps:
+#         - script: ./createSuccessfulEnvironment.sh ${{ testJob.templateContext.requiredComponents }}
+#         - ${{ testJob.steps }}
+#   - ${{ if eq(testJob.templateContext.expectedHTTPResponseCode, 500) }}:
+#     - job:
+#       steps:
+#         - script: ./createRuntimeErrorEnvironment.sh ${{ testJob.templateContext.requiredComponents }}
+#         - ${{ testJob.steps }}
+#testing-template.yml
+
+parameters: 
+- name: testSet
+  type: jobList
+
+jobs:
+- ${{ each testJob in parameters.testSet }}:
+  - ${{ if eq(testJob.templateContext.expectedHTTPResponseCode, 200) }}:
+    - job:
+      displayName: temp1
+      steps: 
+      - powershell: 'Invoke-RestMethod -Uri https://blogs.msdn.microsoft.com/powershell/feed/ | Format-Table -Property Title, pubDate'
+      - ${{ testJob.steps }}    
+  - ${{ if eq(testJob.templateContext.expectedHTTPResponseCode, 500) }}:
+    - job:
+      displayName: temp2
+      steps:
+        - powershell: 'Get-ChildItem -Path Env:\'
+        - ${{ testJob.stepsabc }}

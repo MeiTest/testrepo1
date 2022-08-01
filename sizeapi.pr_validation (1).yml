@@ -1,0 +1,41 @@
+trigger:
+- master
+- main
+
+pool: Default
+
+# extends:
+#   template: testing-template.yml
+#   parameters:
+#     testSet:
+#     - job: positive_test
+#       templateContext:
+#         expectedHTTPResponseCode: 200
+#         requiredComponents: dimensionsapi
+#       steps:
+#       # - script: ./runPositiveTest.sh
+#       - script: echo test1
+#     - job: negative_test
+#       templateContext:
+#         expectedHTTPResponseCode: 500
+#         # requiredComponents: dimensionsapi
+#       steps:
+#       # - script: ./runNegativeTest.sh
+#       - script: echo test2
+#azure-pipeline.yml
+
+
+extends:
+  template: 唉丂荳◎℉㐁a.yml
+  parameters:
+    testSet:
+    - job: positive_test
+      templateContext:
+        expectedHTTPResponseCode: 200
+      steps:
+      - script: echo "Run positive test" 
+    - job: negative_test
+      templateContext:
+        expectedHTTPResponseCode: 500
+      steps:
+      - script: echo "Run negative test"
