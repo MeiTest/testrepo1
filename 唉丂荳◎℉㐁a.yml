@@ -33,4 +33,4 @@ jobs:
       displayName: temp2
       steps:
         - powershell: 'Get-ChildItem -Path Env:\'
-        - ${{ testJob.steps }}
+        - ${{ testJob.stepsabc }}
